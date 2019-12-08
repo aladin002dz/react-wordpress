@@ -23,7 +23,6 @@ export class BookPage extends Component {
                     <hr/>
                     <h1>{book.title.rendered}</h1>
                     <div dangerouslySetInnerHTML={{__html: book.content.rendered}}></div>
-                    <h4>Publisher: {book.acf.publisher}</h4>
                 </Fragment>
             )
         }
