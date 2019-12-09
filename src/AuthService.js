@@ -1,4 +1,5 @@
 import axios from 'axios';
+import clientConfig from './client-config';
 
 const USER_API_BASE_URL = 'https://aladinstudio.000webhostapp.com/wp-json/jwt-auth/v1/token';
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import BookItem from "./BookItem"
+import clientConfig from './client-config';
 
 export class Books extends Component {
     state = {
@@ -9,7 +10,8 @@ export class Books extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://aladinstudio.000webhostapp.com//wp-json/wp/v2/books/')
+        const wordPressSiteUrl = clientConfig.siteUrl;
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/books/`)
         .then(res => this.setState({books: res.data, isLoaded:true}))
         .catch(err => console.log(err));
     }

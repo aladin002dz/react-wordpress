@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import clientConfig from './client-config';
 
 export class BookPage extends Component {
     state = {
@@ -9,7 +10,8 @@ export class BookPage extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://aladinstudio.000webhostapp.com/wp-json/wp/v2/books/${this.props.match.params.id}`)
+        const wordPressSiteUrl = clientConfig.siteUrl;
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/books/${this.props.match.params.id}`)
         .then(res => this.setState({book: res.data, isLoaded:true}))
         .catch(err => console.log(err));
     }

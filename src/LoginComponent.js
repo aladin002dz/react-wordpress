@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AuthService from './AuthService';
 import axios from 'axios';
+import clientConfig from './client-config';
+import qs from 'qs';
 
 class LoginComponent extends React.Component {
 
@@ -26,38 +28,32 @@ class LoginComponent extends React.Component {
 
     login = (e) => {
         e.preventDefault();
-        const credentials = {"username": this.state.username, "password": this.state.password};
-        let _data = '{"username":"'+credentials.username+'","password":"'+credentials.password+'"}';
-        /*axios.post( 
-            'https://aladinstudio.000webhostapp.com/wp-json/jwt-auth/v1/token',
-            _data
-          )*/
-          axios.post('/wp-json/jwt-auth/v1/token', 
-          credentials)
-          .then((response) => {
-            console.log(response)
+        const siteUrl = clientConfig.siteUrl;
+		const loginData = {
+			username: this.state.username,
+			password: this.state.password,
+		};
+        //axios.post( `${siteUrl}/wp-json/jwt-auth/v1/token`, loginData )
+
+
+        const options = {
+        method: 'POST',
+        headers: {'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token, Origin, Authorization,Accept',
+        'Access-Control-Allow-Credentials': true},
+        data: qs.stringify(loginData),
+        url:`${siteUrl}/wp-json/jwt-auth/v1/token`,
+        };
+        axios(options)
+        .then(res => {
+            console.log(res)
           }).catch((error) => {
+            console.log("**failure**")
             console.log(error)
           });
 
-        /*
-        AuthService.login(credentials).then(res => {
-            console.log(res);
-            if(res.status === 200){
-                console.log("success");
-                localStorage.setItem("userInfo", JSON.stringify(res.data.result));
-                this.props.history.push('/welcome');
-
-            }else {
-                console.log("error");
-                this.setState({message: res.data.message});
-            }
-          }, (error) => {
-            console.log(error);
-
-
-        });*/
-    };
+   };
 
     onChange = (e) =>
         this.setState({ [e.target.name]: e.target.value });

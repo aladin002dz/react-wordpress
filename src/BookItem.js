@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import clientConfig from './client-config';
 
 export class BookItem extends Component {
 
@@ -17,8 +18,9 @@ export class BookItem extends Component {
 
     componentDidMount(){
         const {featured_media, author} = this.props.book;
-        const getImageUrl = axios.get(`https://aladinstudio.000webhostapp.com//wp-json/wp/v2/media/${featured_media}`);
-        const getAuthor = axios.get(`https://aladinstudio.000webhostapp.com//wp-json/wp/v2/users/${author}`);
+        const wordPressSiteUrl = clientConfig.siteUrl;
+        const getImageUrl = axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/media/${featured_media}`);
+        const getAuthor = axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/users/${author}`);
         Promise.all([getImageUrl, getAuthor])
             .then(res => this.setState({
                 imgUrl: res[0].data.media_details.sizes.full.source_url,
