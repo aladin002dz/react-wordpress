@@ -32,27 +32,16 @@ class LoginComponent extends React.Component {
 		const loginData = {
 			username: this.state.username,
 			password: this.state.password,
-		};
-        //axios.post( `${siteUrl}/wp-json/jwt-auth/v1/token`, loginData )
-
-
-        const options = {
-        method: 'POST',
-        headers: {'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token, Origin, Authorization,Accept',
-        'Access-Control-Allow-Credentials': true},
-        data: qs.stringify(loginData),
-        url:`${siteUrl}/wp-json/jwt-auth/v1/token`,
         };
-        axios(options)
-        .then(res => {
-            console.log(res)
-          }).catch((error) => {
-            console.log("**failure**")
-            console.log(error)
-          });
-
+        
+        axios.post( `${siteUrl}/wp-json/jwt-auth/v1/token`, loginData )
+            .then(res => {
+                console.log(res)
+                this.props.history.push('/welcome');
+            }).catch((error) => {
+                console.log("**failure**")
+                console.log(error)
+            });
    };
 
     onChange = (e) =>
