@@ -19,14 +19,19 @@ export class BookItem extends Component {
     componentDidMount(){
         const {featured_media, author} = this.props.book;
         const wordPressSiteUrl = clientConfig.siteUrl;
-        const getImageUrl = axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/media/${featured_media}`);
-        const getAuthor = axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/users/${author}`);
-        Promise.all([getImageUrl, getAuthor])
+        //const getImageUrl = axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/media/${featured_media}`);
+        //const getAuthor = axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/users/${author}`);
+        /*Promise.all([getImageUrl, getAuthor])
             .then(res => this.setState({
                 imgUrl: res[0].data.media_details.sizes.full.source_url,
                 author: res[1].data.name,
                 isLoaded: true
-            }));
+            }));*/
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/users/${author}`)
+        .then(res => this.setState({
+            author: res.data.name,
+            isLoaded: true
+        }));
     }
 
     render() {
@@ -39,7 +44,6 @@ export class BookItem extends Component {
                     <small>
                         Review by <strong>{author}</strong>
                     </small> 
-                    <img style={{width:'100%'}} src ={imgUrl} alt={title.rendered}/>
                     <div dangerouslySetInnerHTML={{ __html: excerpt.rendered }}></div>
                     <Link to={`/book/${id}`}>Read Review</Link>
                     <hr />

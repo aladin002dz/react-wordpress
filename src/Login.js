@@ -10,7 +10,7 @@ import axios from 'axios';
 import clientConfig from './client-config';
 import qs from 'qs';
 
-class LoginComponent extends React.Component {
+class Login extends React.Component {
 
     constructor(props){
         super(props);
@@ -87,4 +87,4 @@ const styles= {
     }
 }
 
-export default LoginComponent;
+export default Login;
