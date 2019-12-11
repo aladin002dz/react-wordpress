@@ -7,3 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dashboardTable {
+  margin: 5rem;
+  color: rgba(0,0,0,.92);
+  border-collapse: collapse;
+  text-align: center;
+  width: 80%;
+  font-size: 14px;
+  box-shadow: 0 0 8px #9b9b9b;
+}
