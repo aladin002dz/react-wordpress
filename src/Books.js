@@ -22,12 +22,12 @@ export class Books extends Component {
         books.forEach(book => console.log(book.id +"-"+book.title.rendered));
         if(isLoaded){
             return (
-                <div className="dashboardTable">
+                <ul className="list-group dashboardTable">
                     {books.map(book => (
                         <BookItem key={book.id} book={book}/>
 
                     )) }
-                </div>
+                </ul>
             )
         }
         return <h3>Loading...</h3>

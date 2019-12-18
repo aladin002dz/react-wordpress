@@ -29,18 +29,19 @@ export class BookItem extends Component {
 
     render() {
         const {id, title, excerpt} = this.props.book;
-        const {author, imgUrl, isLoaded} = this.state;
+        const {author, isLoaded} = this.state;
         if(isLoaded){
             return (
-                <div>
-                    <h2>{title.rendered}</h2>
-                    <small>
-                        Review by <strong>{author}</strong>
-                    </small> 
+                <li className="list-group-item d-flex align-items-baseline justify-content-between py-3 px-5">
+                    <div className="d-flex align-items-baseline">
+                        <h2>{title.rendered}</h2>
+                        <small className="px-2">
+                            Review by <strong>{author}</strong>
+                        </small> 
+                    </div>
                     <div dangerouslySetInnerHTML={{ __html: excerpt.rendered }}></div>
                     <Link to={`/book/${id}`}>Read Review</Link>
-                    <hr />
-                </div>
+                </li>
             )
         }
         return null;
