@@ -32,14 +32,17 @@ export class BookPage extends Component {
         const {book, isLoaded, imgUrl} = this.state;
         if(isLoaded){
             return (
-                <Fragment>
-                    <Link to='/'>Go Back</Link>
+                <div className="shadow-lg p-3 m-5 bg-white rounded">
+                    <Link to='/'>&lt; Go Back</Link>
                     <hr/>
-                    <h1>{book.title.rendered}</h1>
-                    
-                    <img style={{width:'30%'}} src ={imgUrl} alt={book.title.rendered}/>
-                    <div dangerouslySetInnerHTML={{__html: book.content.rendered}}></div>
-                </Fragment>
+                    <div className="d-flex align-items-start">
+                    <img className="py-2" style={{width:'30%'}} src ={imgUrl} alt={book.title.rendered}/>
+                    <div className="p-2">
+                        <h1>{book.title.rendered}</h1>
+                        <div dangerouslySetInnerHTML={{__html: book.content.rendered}}></div>
+                    </div>
+                    </div>
+                </div>
             )
         }
         return (<h3>Loading...</h3>)
