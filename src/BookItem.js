@@ -32,15 +32,19 @@ export class BookItem extends Component {
         const {author, isLoaded} = this.state;
         if(isLoaded){
             return (
-                <li className="list-group-item d-flex align-items-baseline justify-content-between py-3 px-5">
-                    <div className="d-flex align-items-baseline">
-                        <h2>{title.rendered}</h2>
-                        <small className="px-2">
-                            Review by <strong>{author}</strong>
-                        </small> 
+                <li className="list-group-item">
+                    <div className="row align-items-center">
+                        <div className="col-sm-12 col-md-4">
+                            <h2>{title.rendered}</h2>
+                            <small className="px-2">
+                                Review by <strong>{author}</strong>
+                            </small> 
+                        </div>
+                        <div className="col-sm-12 col-md-4" dangerouslySetInnerHTML={{ __html: excerpt.rendered }}></div>
+                        <div className="col-sm-12 col-md-4">
+                            <Link to={`/book/${id}`}>Read Review &gt;</Link>
+                        </div>
                     </div>
-                    <div dangerouslySetInnerHTML={{ __html: excerpt.rendered }}></div>
-                    <Link to={`/book/${id}`}>Read Review</Link>
                 </li>
             )
         }
